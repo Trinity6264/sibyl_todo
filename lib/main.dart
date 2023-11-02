@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sibyl_todo/router/todo_router.dart';
 import 'package:sibyl_todo/router/todo_router_observer.dart';
+import 'package:sibyl_todo/todo_blocs.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(const TodoBlocs());
 }
 
 final _appRouter = TodoAutoRouter();

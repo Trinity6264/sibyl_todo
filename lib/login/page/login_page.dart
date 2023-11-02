@@ -14,8 +14,10 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sibyl_todo/common/custom_button.dart';
 import 'package:sibyl_todo/common/custom_text_field.dart';
+import 'package:sibyl_todo/login/bloc/login_bloc.dart';
 import 'package:sibyl_todo/router/todo_router.gr.dart';
 
 @RoutePage()
@@ -29,16 +31,25 @@ class LoginPage extends StatelessWidget {
         title: const Text("Login"),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Center(
+              child: BlocBuilder<LoginBloc, LoginState>(
+                builder: (context, state) {
+                  return Text(state.email);
+                },
+              ),
+            ),
             CustomTextField(
               hint: "Email",
-              onChanged: (value) {},
+              onChanged: (value) {
+                context.read<LoginBloc>().add(
+                      LoginEvent.onChangedEmail(value: value),
+                    );
+              },
             ),
             CustomTextField(
               hint: "Password",
